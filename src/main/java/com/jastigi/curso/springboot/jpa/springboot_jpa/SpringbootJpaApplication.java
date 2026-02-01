@@ -1,6 +1,7 @@
 package com.jastigi.curso.springboot.jpa.springboot_jpa;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,6 +24,26 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		list();
+		findOne();
+
+	}
+
+	public void findOne() {
+		// Person person = null;
+		// Optional<Person> optionalPerson = personRepository.findById(1L);
+		// if (optionalPerson.isPresent()) {
+		// person = optionalPerson.get();
+		// System.out.println(person);
+		// } else {
+		// System.out.println("No se encontro la persona");
+		// }
+
+		personRepository.findById(1L).ifPresent(System.out::println);
+
+	}
+
+	public void list() {
 		// List<Person> persons = (List<Person>) personRepository.findAll();
 		// List<Person> persons = personRepository.findByProgrammingLanguage("Java");
 		// List<Person> persons = personRepository.buscarProgrammingLanguage("Java",
@@ -35,7 +56,6 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		personData.stream().forEach(person -> {
 			System.out.println(person[0] + " es experto en " + person[1]);
 		});
-
 	}
 
 }
