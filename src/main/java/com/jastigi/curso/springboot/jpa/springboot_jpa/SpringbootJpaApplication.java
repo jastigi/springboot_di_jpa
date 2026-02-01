@@ -32,6 +32,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	public void findOne() {
 		// Person person = null;
 		// Optional<Person> optionalPerson = personRepository.findById(1L);
+		// // if (!optionalPerson.isEmpty()) {
 		// if (optionalPerson.isPresent()) {
 		// person = optionalPerson.get();
 		// System.out.println(person);
@@ -39,7 +40,12 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// System.out.println("No se encontro la persona");
 		// }
 
-		personRepository.findById(1L).ifPresent(System.out::println);
+		// personRepository.findById(1L).ifPresent(System.out::println);
+		// personRepository.findOne(1L).ifPresent(System.out::println);
+		// personRepository.findOneByName("Andres").ifPresent(System.out::println);
+		// personRepository.findOneLikeName("ri").ifPresent(System.out::println);
+		// personRepository.findByName("Josefa").ifPresent(System.out::println);
+		personRepository.findByNameContaining("Jose").ifPresent(System.out::println);
 
 	}
 

@@ -5,8 +5,22 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.jastigi.curso.springboot.jpa.springboot_jpa.entities.Person;
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
+
+    @Query("select p from Person p where p.id=?1")
+    Optional<Person> findOne(Long id);
+
+    @Query("select p from Person p where p.name=?1")
+    Optional<Person> findOneByName(String name);
+
+    @Query("select p from Person p where p.name like %?1%")
+    Optional<Person> findOneLikeName(String name);
+
+    Optional<Person> findByName(String name);
+
+    Optional<Person> findByNameContaining(String name);
 
     List<Person> findByProgrammingLanguage(String programmingLanguage);
 
