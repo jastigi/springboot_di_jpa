@@ -27,9 +27,10 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		// create();
-		update();
+		// update();
+		// delete();
 		list();
-		findOne();
+		// findOne();
 
 	}
 
@@ -45,6 +46,8 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		String programmingLanguage = scanner.nextLine();
 		Person person = new Person(null, name, lastName, programmingLanguage);
 		personRepository.save(person);
+
+		scanner.close();
 	}
 
 	@Transactional
@@ -64,10 +67,50 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 			Person personUpdated = personRepository.save(person);
 			System.out.println(personUpdated);
 		});
+
+		scanner.close();
+	}
+
+	@Transactional
+	public void delete() {
+		personRepository.findAll().forEach(System.out::println);
+
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Ingrese el id de la persona a eliminar:");
+		Long id = scanner.nextLong();
+		personRepository.deleteById(id);
+
+		scanner.close();
+	}
+
+	@Transactional
+	public void deleteCR() {
+		personRepository.findAll().forEach(System.out::println);
+
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Ingrese el id de la persona a eliminar:");
+		Long id = scanner.nextLong();
+
+		Optional<Person> optionalPerson = personRepository.findById(id);
+
+		optionalPerson.ifPresentOrElse(personRepository::delete,
+				() -> System.out.println("No se encontro la persona"));
+
+		scanner.close();
 	}
 
 	@Transactional(readOnly = true)
 	public void findOne() {
+		personRepository.findAll().forEach(System.out::println);
+
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Ingrese el id de la persona a buscar:");
+		Long id = scanner.nextLong();
+		Optional<Person> optionalPerson = personRepository.findById(id);
+
+		optionalPerson.ifPresent(System.out::println);
+
+		scanner.close();
 		// Person person = null;
 		// Optional<Person> optionalPerson = personRepository.findById(1L);
 		// // if (!optionalPerson.isEmpty()) {
