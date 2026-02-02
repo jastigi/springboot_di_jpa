@@ -34,8 +34,26 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// deleteCR();
 		// list();
 		// findOne();
-		obtenerPersonDataFullById();
-		obtenerPersonDataFull();
+		// obtenerPersonDataFullById();
+		// obtenerPersonDataFull();
+		// findAllMixPerson();
+		findAllObjectPersonPersonalized();
+	}
+
+	@Transactional(readOnly = true)
+	public void findAllObjectPersonPersonalized() {
+		System.out.println("================== Consulta datos completos de personas personalizados ==================");
+		List<Person> persons = personRepository.findAllObjectPersonPersonalized();
+		persons.forEach(System.out::println);
+	}
+
+	@Transactional(readOnly = true)
+	public void findAllMixPerson() {
+		System.out.println("================== Consulta datos completos de personas ==================");
+		List<Object[]> persons = personRepository.findAllMixPerson();
+		persons.forEach(personFull -> {
+			System.out.println("programmingLanguage = " + personFull[1] + " " + personFull[0]);
+		});
 	}
 
 	@Transactional(readOnly = true)
