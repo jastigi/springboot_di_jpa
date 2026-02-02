@@ -26,7 +26,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		getFullNameById();
+		// getFullNameById();
 		// getNameById();
 		// create();
 		// update();
@@ -34,7 +34,34 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// deleteCR();
 		// list();
 		// findOne();
+		obtenerPersonDataFullById();
+		obtenerPersonDataFull();
+	}
 
+	@Transactional(readOnly = true)
+	public void obtenerPersonDataFullById() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("================== Consulta datos completos de una persona por id ==================");
+		System.out.println("Ingrese el id de la persona a buscar:");
+		Long id = scanner.nextLong();
+		Object[] person = (Object[]) personRepository.obtenerPersonDataFullById(id);
+		System.out.println("id = " + person[0]);
+		System.out.println("name = " + person[1]);
+		System.out.println("lastName = " + person[2]);
+		System.out.println("programmingLanguage = " + person[3]);
+		scanner.close();
+	}
+
+	@Transactional(readOnly = true)
+	public void obtenerPersonDataFull() {
+		System.out.println("================== Consulta datos completos de personas ==================");
+		List<Object[]> persons = personRepository.obtenerPersonDataFull();
+		persons.forEach(personFull -> {
+			System.out.println("id = " + personFull[0]);
+			System.out.println("name = " + personFull[1]);
+			System.out.println("lastName = " + personFull[2]);
+			System.out.println("programmingLanguage = " + personFull[3]);
+		});
 	}
 
 	@Transactional(readOnly = true)
