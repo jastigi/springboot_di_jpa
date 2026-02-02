@@ -26,18 +26,44 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		getFullNameById();
+		// getNameById();
 		// create();
 		// update();
 		// delete();
-		list();
+		// deleteCR();
+		// list();
 		// findOne();
 
+	}
+
+	@Transactional(readOnly = true)
+	public void getNameById() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("================== Consulta solo del nombre por id ==================");
+		System.out.println("Ingrese el id de la persona a buscar:");
+		Long id = scanner.nextLong();
+		String name = personRepository.getNameById(id);
+		System.out.println(name);
+		scanner.close();
+	}
+
+	@Transactional(readOnly = true)
+	public void getFullNameById() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("================== Consulta nombre completo por id ==================");
+		System.out.println("Ingrese el id de la persona a buscar:");
+		Long id = scanner.nextLong();
+		String name = personRepository.getFullNameById(id);
+		System.out.println(name);
+		scanner.close();
 	}
 
 	@Transactional
 	public void create() {
 
 		Scanner scanner = new Scanner(System.in);
+		System.out.println("================== Crear persona ==================");
 		System.out.println("Ingrese el nombre");
 		String name = scanner.nextLine();
 		System.out.println("Ingrese el apellido");
@@ -54,6 +80,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	public void update() {
 
 		Scanner scanner = new Scanner(System.in);
+		System.out.println("================== Actualizar persona ==================");
 		System.out.println("Ingrese el id de la persona a actualizar:");
 		Long id = scanner.nextLong();
 
@@ -76,6 +103,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		personRepository.findAll().forEach(System.out::println);
 
 		Scanner scanner = new Scanner(System.in);
+		System.out.println("================== Eliminar persona ==================");
 		System.out.println("Ingrese el id de la persona a eliminar:");
 		Long id = scanner.nextLong();
 		personRepository.deleteById(id);
@@ -88,6 +116,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		personRepository.findAll().forEach(System.out::println);
 
 		Scanner scanner = new Scanner(System.in);
+		System.out.println("================== Eliminar persona CRUD ==================");
 		System.out.println("Ingrese el id de la persona a eliminar:");
 		Long id = scanner.nextLong();
 
@@ -104,6 +133,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		personRepository.findAll().forEach(System.out::println);
 
 		Scanner scanner = new Scanner(System.in);
+		System.out.println("================== Buscar persona por id ==================");
 		System.out.println("Ingrese el id de la persona a buscar:");
 		Long id = scanner.nextLong();
 		Optional<Person> optionalPerson = personRepository.findById(id);
@@ -132,6 +162,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 	@Transactional(readOnly = true)
 	public void list() {
+		System.out.println("================== Listar personas ==================");
 		// List<Person> persons = (List<Person>) personRepository.findAll();
 		// List<Person> persons = personRepository.findByProgrammingLanguage("Java");
 		// List<Person> persons = personRepository.buscarProgrammingLanguage("Java",
