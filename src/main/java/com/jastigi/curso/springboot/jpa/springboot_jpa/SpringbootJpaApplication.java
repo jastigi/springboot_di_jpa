@@ -41,8 +41,32 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// findAllObjectPersonPersonalized();
 		// findAllPersonDto();
 		// findAllNamesDistinct();
-		findAllProgrammingLanguagesDistinct();
-		findAllProgrammingLanguagesDistinctCount();
+		// findAllProgrammingLanguagesDistinct();
+		// findAllProgrammingLanguagesDistinctCount();
+		findAllFullNameConcat();
+		findAllFullNameConcatUpper();
+		findAllFullNameConcatLower();
+	}
+
+	@Transactional(readOnly = true)
+	public void findAllFullNameConcatLower() {
+		System.out.println("================== Consulta nombre completo concatenado en minusculas ==================");
+		List<String> fullNames = personRepository.findAllFullNameConcatLower();
+		fullNames.forEach(System.out::println);
+	}
+
+	@Transactional(readOnly = true)
+	public void findAllFullNameConcatUpper() {
+		System.out.println("================== Consulta nombre completo concatenado en mayusculas ==================");
+		List<String> fullNames = personRepository.findAllFullNameConcatUpper();
+		fullNames.forEach(System.out::println);
+	}
+
+	@Transactional(readOnly = true)
+	public void findAllFullNameConcat() {
+		System.out.println("================== Consulta nombre completo concatenado ==================");
+		List<String> fullNames = personRepository.findAllFullNameConcat();
+		fullNames.forEach(System.out::println);
 	}
 
 	@Transactional(readOnly = true)
