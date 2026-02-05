@@ -43,9 +43,25 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// findAllNamesDistinct();
 		// findAllProgrammingLanguagesDistinct();
 		// findAllProgrammingLanguagesDistinctCount();
-		findAllFullNameConcat();
-		findAllFullNameConcatUpper();
-		findAllFullNameConcatLower();
+		// findAllFullNameConcat();
+		// findAllFullNameConcatUpper();
+		// findAllFullNameConcatLower();
+		// findByIdBetween();
+		findByNameBetween();
+	}
+
+	@Transactional(readOnly = true)
+	public void findByNameBetween() {
+		System.out.println("================== Consulta personas por nombre entre J y P ==================");
+		List<Person> persons = personRepository.findByNameBetween();
+		persons.forEach(System.out::println);
+	}
+
+	@Transactional(readOnly = true)
+	public void findByIdBetween() {
+		System.out.println("================== Consulta personas por id entre 2 y 5 ==================");
+		List<Person> persons = personRepository.findByIdBetween();
+		persons.forEach(System.out::println);
 	}
 
 	@Transactional(readOnly = true)
