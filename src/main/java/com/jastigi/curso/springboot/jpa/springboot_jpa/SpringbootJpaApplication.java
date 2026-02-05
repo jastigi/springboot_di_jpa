@@ -52,7 +52,55 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// findAllIdBetween();
 		// findAllIdBetweenOrderByIdDesc();
 		// findAllNameBetweenOrderByNameAsc();
-		getAllOrdered();
+		// getAllOrdered();
+		// totalPerson();
+		// minId();
+		// maxId();
+		getPersonNameLength();
+		getMinLengthName();
+		getMaxLengthName();
+	}
+
+	@Transactional(readOnly = true)
+	public void getMinLengthName() {
+		System.out.println("================== Consulta longitud minima del nombre ==================");
+		Integer minLengthName = personRepository.getMinLengthName();
+		System.out.println("Longitud minima del nombre: " + minLengthName);
+	}
+
+	@Transactional(readOnly = true)
+	public void getMaxLengthName() {
+		System.out.println("================== Consulta longitud maxima del nombre ==================");
+		Integer maxLengthName = personRepository.getMaxLengthName();
+		System.out.println("Longitud maxima del nombre: " + maxLengthName);
+	}
+
+	@Transactional(readOnly = true)
+	public void getPersonNameLength() {
+		System.out.println("================== Consulta nombre y longitud ==================");
+		List<Object[]> persons = personRepository.getPersonNameLength();
+		persons.forEach(person -> System.out.println("Nombre: " + person[0] + ", Longitud: " + person[1]));
+	}
+
+	@Transactional(readOnly = true)
+	public void totalPerson() {
+		System.out.println("================== Consulta total de personas ==================");
+		Long total = personRepository.totalPerson();
+		System.out.println("Total de personas: " + total);
+	}
+
+	@Transactional(readOnly = true)
+	public void minId() {
+		System.out.println("================== Consulta minimo de id ==================");
+		Long min = personRepository.minId();
+		System.out.println("Minimo de id: " + min);
+	}
+
+	@Transactional(readOnly = true)
+	public void maxId() {
+		System.out.println("================== Consulta maximo de id ==================");
+		Long max = personRepository.maxId();
+		System.out.println("Maximo de id: " + max);
 	}
 
 	@Transactional(readOnly = true)
