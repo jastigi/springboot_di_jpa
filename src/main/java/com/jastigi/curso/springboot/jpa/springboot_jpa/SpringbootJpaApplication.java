@@ -59,7 +59,23 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// getPersonNameLength();
 		// getMinLengthName();
 		// getMaxLengthName();
-		getResumeAggregationFunction();
+		// getResumeAggregationFunction();
+		getShorterName();
+		getLastRegistration();
+	}
+
+	@Transactional(readOnly = true)
+	public void getShorterName() {
+		System.out.println("================== Consulta nombre y longitud ==================");
+		List<Object[]> persons = personRepository.getShorterName();
+		persons.forEach(person -> System.out.println("Nombre: " + person[0] + ", Longitud: " + person[1]));
+	}
+
+	@Transactional(readOnly = true)
+	public void getLastRegistration() {
+		System.out.println("================== Consulta ultimo registro ==================");
+		Optional<Person> person = personRepository.getLastRegistration();
+		person.ifPresent(System.out::println);
 	}
 
 	@Transactional(readOnly = true)
