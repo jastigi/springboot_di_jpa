@@ -1,5 +1,6 @@
 package com.jastigi.curso.springboot.jpa.springboot_jpa;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -30,7 +31,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// getFullNameById();
 		// getNameById();
 		// create();
-		// update();
+		update();
 		// delete();
 		// deleteCR();
 		// list();
@@ -60,8 +61,16 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// getMinLengthName();
 		// getMaxLengthName();
 		// getResumeAggregationFunction();
-		getShorterName();
-		getLastRegistration();
+		// getShorterName();
+		// getLastRegistration();
+		// getPersonsByIds();
+	}
+
+	@Transactional(readOnly = true)
+	public void getPersonsByIds() {
+		System.out.println("================== Consulta personas por id ==================");
+		List<Person> persons = personRepository.getPersonsByIds(Arrays.asList(1L, 2L, 5L));
+		persons.forEach(System.out::println);
 	}
 
 	@Transactional(readOnly = true)
