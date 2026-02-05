@@ -10,14 +10,17 @@ import java.util.Optional;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
-    List<Person> findByNameBetween(String name1, String name2);
+    @Query("select p from Person p order by p.name desc, p.lastName asc")
+    List<Person> getAllOrdered();
 
-    List<Person> findByIdBetween(Long id1, Long id2);
+    List<Person> findByNameBetweenOrderByNameAsc(String name1, String name2);
 
-    @Query("select p from Person p where p.name between ?1 and ?2")
+    List<Person> findByIdBetweenOrderByIdDesc(Long id1, Long id2);
+
+    @Query("select p from Person p where p.name between ?1 and ?2 order by p.name")
     List<Person> findByAllNameBetween(String name1, String name2);
 
-    @Query("select p from Person p where p.id between ?1 and ?2")
+    @Query("select p from Person p where p.id between ?1 and ?2 order by p.name desc")
     List<Person> findByAllIdBetween(Long id1, Long id2);
 
     @Query("select upper(p.name || ' ' || p.lastName) from Person p")

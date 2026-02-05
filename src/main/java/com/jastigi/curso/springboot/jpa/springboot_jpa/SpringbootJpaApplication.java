@@ -46,21 +46,54 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// findAllFullNameConcat();
 		// findAllFullNameConcatUpper();
 		// findAllFullNameConcatLower();
-		findByIdBetween();
-		findByNameBetween();
+		// findByIdBetween();
+		// findByNameBetween();
+		// findAllNameBetween();
+		// findAllIdBetween();
+		// findAllIdBetweenOrderByIdDesc();
+		// findAllNameBetweenOrderByNameAsc();
+		getAllOrdered();
 	}
 
 	@Transactional(readOnly = true)
-	public void findByNameBetween() {
+	public void getAllOrdered() {
+		System.out.println("================== Consulta personas ==================");
+		List<Person> persons = personRepository.getAllOrdered();
+		persons.forEach(System.out::println);
+	}
+
+	@Transactional(readOnly = true)
+	public void findAllIdBetween() {
+		System.out.println("================== Consulta personas por id entre 2 y 5 ==================");
+		List<Person> persons = personRepository.findByAllIdBetween(2L, 5L);
+		persons.forEach(System.out::println);
+	}
+
+	@Transactional(readOnly = true)
+	public void findAllNameBetween() {
 		System.out.println("================== Consulta personas por nombre entre J y P ==================");
-		List<Person> persons = personRepository.findByNameBetween("J", "P");
+		List<Person> persons = personRepository.findByAllNameBetween("J", "P");
+		persons.forEach(System.out::println);
+	}
+
+	@Transactional(readOnly = true)
+	public void findAllIdBetweenOrderByIdDesc() {
+		System.out.println("================== Consulta personas por id entre 2 y 5 ==================");
+		List<Person> persons = personRepository.findByIdBetweenOrderByIdDesc(2L, 5L);
+		persons.forEach(System.out::println);
+	}
+
+	@Transactional(readOnly = true)
+	public void findAllNameBetweenOrderByNameAsc() {
+		System.out.println("================== Consulta personas por nombre entre J y P ==================");
+		List<Person> persons = personRepository.findByNameBetweenOrderByNameAsc("J", "P");
 		persons.forEach(System.out::println);
 	}
 
 	@Transactional(readOnly = true)
 	public void findByIdBetween() {
 		System.out.println("================== Consulta personas por id entre 2 y 5 ==================");
-		List<Person> persons = personRepository.findByIdBetween(2L, 5L);
+		List<Person> persons = personRepository.findByAllIdBetween(2L, 5L);
 		persons.forEach(System.out::println);
 	}
 
