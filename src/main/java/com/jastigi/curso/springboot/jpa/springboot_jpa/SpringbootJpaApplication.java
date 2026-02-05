@@ -46,21 +46,21 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// findAllFullNameConcat();
 		// findAllFullNameConcatUpper();
 		// findAllFullNameConcatLower();
-		// findByIdBetween();
+		findByIdBetween();
 		findByNameBetween();
 	}
 
 	@Transactional(readOnly = true)
 	public void findByNameBetween() {
 		System.out.println("================== Consulta personas por nombre entre J y P ==================");
-		List<Person> persons = personRepository.findByNameBetween();
+		List<Person> persons = personRepository.findByNameBetween("J", "P");
 		persons.forEach(System.out::println);
 	}
 
 	@Transactional(readOnly = true)
 	public void findByIdBetween() {
 		System.out.println("================== Consulta personas por id entre 2 y 5 ==================");
-		List<Person> persons = personRepository.findByIdBetween();
+		List<Person> persons = personRepository.findByIdBetween(2L, 5L);
 		persons.forEach(System.out::println);
 	}
 
